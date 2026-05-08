@@ -1,0 +1,11 @@
+com\bookmanager\service\BookService.class
+com\bookmanager\controller\WebController.class
+com\bookmanager\BookManagerApplication.class
+com\bookmanager\model\Book$Source.class
+com\bookmanager\repository\BookRepository.class
+com\bookmanager\model\Book.class
+com\bookmanager\config\SecurityConfig.class
+com\bookmanager\dto\BookDTO.class
+com\bookmanager\controller\BookController.class
+com\bookmanager\config\WebConfig.class
+com\bookmanager\model\Book$Status.class
