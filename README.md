@@ -1,82 +1,80 @@
-#  Book Management System
+# BookShelf Manager
 
-A full-stack book management application built with Spring Boot, MySQL, and React.
+![CI](https://github.com/<your-username>/BookShelf/actions/workflows/ci.yml/badge.svg)
+
+A full-stack book management application built with **Spring Boot 3**, **MySQL**, and **React 18**.
 
 ## Features
 
-- Personal library management
-- Reading progress tracking
-- Multi-currency support
-- User authentication
-- RESTful API
-- Responsive web interface
+- Personal library management (add, edit, delete books)
+- Reading progress tracking (Wishlist → Reading → Completed)
+- Multi-currency price tracking
+- Smart search & filter with pagination
+- User authentication (Spring Security)
+- RESTful API with OpenAPI/Swagger docs
+- Dockerized for easy deployment
 
 ## Tech Stack
 
-### Backend
-- Spring Boot 3.2.0
-- Spring Data JPA
-- Spring Security
-- MySQL Database
-- Thymeleaf
-- Maven
+| Layer     | Technology                          |
+|-----------|-------------------------------------|
+| Backend   | Spring Boot 3.2, Spring Data JPA, Spring Security |
+| Database  | H2 (dev), MySQL 8 (prod)            |
+| Frontend  | React 18, Tailwind CSS, Vite        |
+| Docs      | SpringDoc OpenAPI (Swagger UI)      |
+| CI/CD     | GitHub Actions                      |
+| Container | Docker, Docker Compose              |
 
-### Frontend
-- React 18
-- Tailwind CSS
-- Lucide React Icons
+## Quick Start
 
-## Setup Instructions
+### Option A — Docker Compose (recommended)
+```bash
+cp .env.example .env   # fill in your values
+docker-compose up --build
+```
+App: http://localhost:8080 | Swagger: http://localhost:8080/swagger-ui.html
 
-### Prerequisites
-- Java 17+
-- Maven 3.6+
-- MySQL 8.0+
-- Node.js 16+
+### Option B — Local Dev
 
-### Database Setup
-1. Install MySQL and create database:
-```sql
-CREATE DATABASE bookmanager_db;
+**Backend**
+```bash
+# Uses H2 in-memory DB by default — no MySQL needed for dev
+mvn spring-boot:run
 ```
 
-2. Update `application.properties` with your MySQL credentials
+**Frontend**
+```bash
+npm install
+npm run dev   # http://localhost:5173
+```
 
-### Backend Setup
-1. Navigate to project root
-2. Run: `mvn spring-boot:run`
-3. Access at: http://localhost:8080
+## Environment Variables
 
-### Frontend Setup
-1. Install dependencies: `npm install`
-2. Start dev server: `npm run dev`
-3. Access at: http://localhost:5173
+See `.env.example` for all required variables. Never commit `.env`.
+
+## API
+
+Base URL: `/api/v1/books`
+
+| Method | Endpoint         | Description              |
+|--------|------------------|--------------------------|
+| GET    | `/`              | List books (paginated)   |
+| GET    | `/{id}`          | Get book by ID           |
+| POST   | `/`              | Create book              |
+| PUT    | `/{id}`          | Update book              |
+| DELETE | `/{id}`          | Delete book              |
+| GET    | `/stats`         | Get counts by status     |
+
+Query params: `search`, `status`, `page`, `size`, `sortBy`, `sortDir`
+
+Interactive docs: http://localhost:8080/swagger-ui.html
+
+## Running Tests
+
+```bash
+mvn test
+```
 
 ## Default Login
-- Username: admin
-- Password: admin123
-
-## API Endpoints
-
-### Books
-- GET `/api/books` - Get all books
-- POST `/api/books` - Create book
-- PUT `/api/books/{id}` - Update book
-- DELETE `/api/books/{id}` - Delete book
-- GET `/api/books/stats` - Get statistics
-
-## Database Schema
-
-### Books Table
-- id (BIGINT, PRIMARY KEY)
-- title (VARCHAR)
-- author (VARCHAR)
-- status (VARCHAR)
-- source (VARCHAR)
-- price (DECIMAL)
-- currency (VARCHAR)
-- borrowed_from (VARCHAR)
-- notes (TEXT)
-- created_at (TIMESTAMP)
-- updated_at (TIMESTAMP)
- 
+- Username: `admin`
+- Password: `admin123` (override via `ADMIN_PASSWORD` env var)

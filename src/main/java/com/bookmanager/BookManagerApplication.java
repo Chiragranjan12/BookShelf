@@ -1,4 +1,4 @@
-package  com.bookmanager;
+package com.bookmanager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,4 +9,3 @@ public class BookManagerApplication {
         SpringApplication.run(BookManagerApplication.class, args);
     }
 }
- 
